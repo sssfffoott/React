@@ -43,7 +43,7 @@ main {
 
 /* PROFILE */
 .profile-card {
-  background: rgb(202, 202, 202);
+  background: rgb(138, 138, 138);
   border-radius: 20px;
   padding: 25px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
@@ -60,13 +60,18 @@ main {
 .avatar {
   width: 55px;
   height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
   display: flex;
   align-items: center;
-  background: #cb720c;
+  justify-content: center;
+  background: #111827;
   color: white;
-  border-radius: 50%;
   font-size: 24px;
   font-weight: bold;
+  text-transform: uppercase;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .profile-info h2 {
@@ -199,4 +204,79 @@ main {
   outline-offset: 2px;
 }
 
+/* IMAGE UPLOAD */
+.upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: #f3f4f6;
+  color: #111827;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
 
+.upload-btn:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+.upload-btn:active {
+  transform: translateY(0);
+}
+
+/* PREVIEW */
+.preview {
+  position: relative;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.preview img {
+  display: block;
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+}
+
+.remove-photo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(17, 24, 39, 0.75);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.remove-photo:hover {
+  background: #111827;
+  transform: scale(1.08);
+}
+
+/* POST IMAGE */
+.post-image {
+  display: block;
+  max-width: 100%;
+  max-height: 320px;
+  width: auto;
+  height: auto;
+  object-fit: contain;   
+  border-radius: 14px;
+  margin: 12px 0;
+  border: 1px solid #e5e7eb;
+}
