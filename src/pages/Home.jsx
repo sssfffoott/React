@@ -1,19 +1,34 @@
 import Post from "../components/Post";
+import { usePosts } from "../content/PostsContext";
 
 function Home() {
-    const posts = [
-        { id: 1, author: 'kai angel', title: 'shhh', text: "andy warhol", image: '/src/assets/shh.webp' },
-        { id: 2, author: 'kai angel', title: 'shhh', text: "shhh", image: '/src/assets/shh.webp' },
-        { id: 3, author: 'kai angel', title: 'shhh', text: "shhh", image: '/src/assets/shh.webp' },
-    ]
+    // const posts = [
+    //     { id: 1, author: 'kai angel', title: 'shhh', text: "andy warhol", image: '/src/assets/shh.webp' },
+    //     { id: 2, author: 'kai angel', title: 'shhh', text: "shhh", image: '/src/assets/shh.webp' },
+    //     { id: 3, author: 'kai angel', title: 'shhh', text: "shhh", image: '/src/assets/shh.webp' },
+    // ]
+
+    const {posts} = usePosts();
+
     return (
         <section className="page">
             <h1>Главная страница</h1>
             <div className="feed">
                 <h2>Лента</h2>
-                {posts.map((post) => (
-                    <Post key={post.id} {...post} />
-                ))}
+                {posts.length > 0 ?(
+                    posts.map((post) => (
+                        <Post
+                        key={post.id}
+                        id={post.id}
+                        author={post.author}
+                        title={post.title}
+                        text={post.text}
+                        image={post.image} />
+                    ) )
+
+                ) : (
+                    <p>Нет публикаций</p>
+                )}
             </div>
         </section>
     )

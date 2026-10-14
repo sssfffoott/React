@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { PostsProvider } from './content/PostsContext';
 
 
 import './App.css'
@@ -16,12 +17,14 @@ function App() {
     <div className='app'>
       <Header />
       <main>
+        <PostsProvider>
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/Profile" element={<Profile />}/>
           <Route path="/Setting" element={<Setting />}/>
           <Route path="/About" element={<About />}/>
         </Routes>
+        </PostsProvider>
       </main>
     </div>
   )

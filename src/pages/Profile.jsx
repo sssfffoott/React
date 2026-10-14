@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
 import ProfileCard from "../components/ProfileCard";
 import Post from "../components/Post";
+import { usePosts } from "../content/PostsContext";
 
 function Profile(){
-    const [posts, setPosts] = useState(()=>{
-        const savedPosts = localStorage.getItem("posts");
+    const { posts, setPosts } = usePosts();
+    // const [posts, setPosts] = useState(()=>{
+    //     const savedPosts = localStorage.getItem("posts");
 
-        if(savedPosts){
-            return JSON.parse(savedPosts);
-        }
-        return[
-         {
-            id: 1,
-            author: 'kai angel',
-            title: 'shhh',
-            text: "andy warhol",
-            image: '/src/assets/shh.webp'
-        },
-    ];
-    });
+    //     if(savedPosts){
+    //         return JSON.parse(savedPosts);
+    //     }
+    //     return[
+    //      {
+    //         id: 1,
+    //         author: 'kai angel',
+    //         title: 'shhh',
+    //         text: "andy warhol",
+    //         image: '/src/assets/shh.webp'
+    //     },
+    // ];
+    // });
 
     const [title, setTitle] = useState(''); 
     const [text, setText] = useState("");
@@ -27,11 +29,11 @@ function Profile(){
     const [error, setError] = useState("")
 
 
-    useEffect(() => {
-        console.log("Количество постов", posts.length);
-        localStorage.setItem("posts", JSON.stringify(posts));
-    }, [posts]
-)
+//     useEffect(() => {
+//         console.log("Количество постов", posts.length);
+//         localStorage.setItem("posts", JSON.stringify(posts));
+//     }, [posts]
+// )
 
     function deletePost(id){
         setPosts(
@@ -62,7 +64,7 @@ function Profile(){
 
     function addPost(event) {
         event.preventDefault();
-        if(title.trim() || !text.trim()){
+        if(!title.trim() || !text.trim()){
             setError("Заполните заголовок и текст");
             return;
         }
