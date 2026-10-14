@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileCard from "../components/ProfileCard";
 import Post from "../components/Post";
 
 function Profile(){
-    const [posts, setPosts] = useState([
+    const [posts, setPosts] = useState(()=>{
+        const savedPosts = localStorage.getItem("posts");
+
+        if(savedPosts){
+            return JSON.parse(savedPosts);
+        }
+        return[
          {
             id: 1,
             author: 'kai angel',
@@ -11,17 +17,30 @@ function Profile(){
             text: "andy warhol",
             image: '/src/assets/shh.webp'
         },
-    ]);
+    ];
+    });
 
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState(''); 
     const [text, setText] = useState("");
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState("");
+    const [error, setError] = useState("")
+
+
+    useEffect(() => {
+        console.log("Количество постов", posts.length);
+        localStorage.setItem("posts", JSON.stringify(posts));
+    }, [posts]
+)
 
     function deletePost(id){
         setPosts(
             posts.filter((post) => post.id !==id)
         )
+    }
+
+    function clearPosts(){
+        setPosts([]);
     }
 
     function handleImageChange(event) {
@@ -43,6 +62,10 @@ function Profile(){
 
     function addPost(event) {
         event.preventDefault();
+        if(title.trim() || !text.trim()){
+            setError("Заполните заголовок и текст");
+            return;
+        }
 
         const newPost = {
             id: Date.now(),
@@ -57,6 +80,7 @@ function Profile(){
         setText("");
         setImage(null);
         setPreview("");
+        setError("");
     }
     
     return(
@@ -65,7 +89,13 @@ function Profile(){
             <ProfileCard />
             <div className="feed">
                 <h2>Мои публикации</h2>
+                <p>Всего публикаций {posts.length}</p>
                  <form className="post-form" onSubmit={addPost}>
+                    {error &&(
+                        <p className="form-error">
+                            {error}
+                        </p>
+                    )}
                 <input
                     type="text"
                     placeholder="Заголовок"
@@ -104,6 +134,8 @@ function Profile(){
                     Опубликовать
                 </button>
             </form>
+
+            <button onClick={clearPosts}>Удалить все посты</button>
 
             {posts.map((post) => (
                 <Post
