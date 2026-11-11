@@ -1,23 +1,36 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 
 function Header() {
+    const { theme, toggleTheme } = useTheme();
+
     return (
-        <header className="header">
-            <h1>SOUNCLOUD</h1>
-            <p>sh!</p>
+        <header className={`header theme-${theme}`}>
+            <h1>SOCIAL NETWORK</h1>
+            <p>for communicate</p>
+
             <nav className="navigation">
-                <Link to="/">
-                Главная
+                <Link className={`nav-link theme-${theme}`} to="/">
+                    Главная
                 </Link>
-                <Link to="/profile">
-                Моя страница
+                <Link className={`nav-link theme-${theme}`} to="/profile">
+                    Моя страница
                 </Link>
-                <Link to="/settings">
-                Настройки
+                <Link className={`nav-link theme-${theme}`} to="/settings">
+                    Настройки
                 </Link>
-                <Link to="/about">
-                О проекте
+                <Link className={`nav-link theme-${theme}`} to="/about">
+                    О проекте
                 </Link>
+                <Link className={`nav-link theme-${theme}`} to="/weather">
+                    Погода
+                </Link>
+                <Link className={`nav-link theme-${theme}`} to="/currency">
+                    Курсы валют
+                </Link>
+                <button className="toggle" onClick={toggleTheme}>
+                    {theme === "light" ? "🌙" : "🌞"}
+                </button>
             </nav>
         </header>
     )

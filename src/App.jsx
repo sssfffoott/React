@@ -1,30 +1,37 @@
-import { Routes, Route } from 'react-router-dom';
-import { PostsProvider } from './content/PostsContext';
+import { Routes, Route } from "react-router-dom";
+import { PostsProvider } from "./context/PostsContext";
+import { UserProvider } from "./context/UserContext";
+import { useTheme } from "./context/ThemeContext";
 
+import './App.css';
+import Header from "./components/Header";
 
-import './App.css'
-import Header from "./components/Header"
-import ProfileCard from "./components/ProfileCard"
-
-import Home from './pages/Home';
-import Profile from './pages/Profile';
-import Setting from './pages/Setting';
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import Settings from "./pages/Settings";
 import About from "./pages/About";
-
+import WeatherPage from "./pages/WeatherPage";
+import CurrencyPage from "./pages/CurrencyPage";
 
 function App() {
+  const { theme } = useTheme();
+
   return (
-    <div className='app'>
+    <div className={`app theme-${theme}`}>
       <Header />
       <main>
-        <PostsProvider>
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/Profile" element={<Profile />}/>
-          <Route path="/Setting" element={<Setting />}/>
-          <Route path="/About" element={<About />}/>
-        </Routes>
-        </PostsProvider>
+        <UserProvider>
+          <PostsProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/weather" element={<WeatherPage />} />
+              <Route path="/currency" element={<CurrencyPage />} />
+            </Routes>
+          </PostsProvider>
+        </UserProvider>
       </main>
     </div>
   )

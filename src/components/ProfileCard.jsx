@@ -1,5 +1,7 @@
 // import { useState } from "react";
 // import Post from "./Post";
+import avatar from "../assets/kai.jpeg";
+import { useUser } from "../context/UserContext";
 
 function ProfileCard() {
     // const [posts, setPosts] = useState([
@@ -73,4 +75,10 @@ function ProfileCard() {
     )
 }
 
+// git add .
+// git commit -m "text commit"
+// git push
+
+
 export default ProfileCard;
+

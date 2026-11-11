@@ -1,5 +1,5 @@
 import Post from "../components/Post";
-import { usePosts } from "../content/PostsContext";
+import { usePosts } from "../context/PostsContext";
 
 function Home() {
     // const posts = [

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ProfileCard from "../components/ProfileCard";
 import Post from "../components/Post";
-import { usePosts } from "../content/PostsContext";
+import { usePosts } from "../context/PostsContext";
 
 function Profile(){
     const { posts, setPosts } = usePosts();
